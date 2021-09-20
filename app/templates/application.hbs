@@ -1,5 +1,21 @@
-{{page-title "HmmAgain"}}
+{{#let (track true) as |show|}}
+  {{#if show.value}}
+    {{#let (track false) as |display|}}
+      <div class={{if display.value "hide-ads-yo" ""}}>
+        <div {{i-can-haz-elz}}>
+          currently hidden: <code>{{not display.value}}</code>
+        </div>
+      </div>
 
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+      <button type="button" {{on 'click' (fn display.update (not display.value))}}>
+        {{if display.value "show" "hide"}}
+      </button>
+    {{/let}}
+  {{/if}}
+  <div>
+    <button type="button" {{on 'click' (fn show.update (not show.value))}}>
+      {{if show.value 'remove' 'add back'}}
+      the element
+    </button>
+  </div>
+{{/let}}
